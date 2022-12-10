@@ -1,4 +1,4 @@
-import { ChessPieces, Colors } from "../types/common";
+import { Colors } from "../types/common";
 import {
   GameState,
   GameStateObject,
@@ -7,9 +7,10 @@ import {
 } from "../types/game";
 import FenValidator from "./FenValidator";
 import { MovesGenerator } from "./MovesGenerator";
-import { mapColumnIndexToLetter } from "../utils";
+import { fenSymbolsToPiecesMapping, mapColumnIndexToLetter } from "../utils";
 import { MoveMaker } from "./MoveMaker";
 import { MoveIndexes } from "./MoveIndexes";
+import FenGenerator from "./FenGenerator";
 
 type FenFieldSymbol =
   | "p"
@@ -24,21 +25,6 @@ type FenFieldSymbol =
   | "B"
   | "Q"
   | "K";
-
-export const fenSymbolsToPiecesMapping = {
-  p: { color: Colors.BLACK, piece: ChessPieces.PAWN },
-  r: { color: Colors.BLACK, piece: ChessPieces.ROOK },
-  n: { color: Colors.BLACK, piece: ChessPieces.KNIGHT },
-  b: { color: Colors.BLACK, piece: ChessPieces.BISHOP },
-  q: { color: Colors.BLACK, piece: ChessPieces.QUEEN },
-  k: { color: Colors.BLACK, piece: ChessPieces.KING },
-  P: { color: Colors.WHITE, piece: ChessPieces.PAWN },
-  R: { color: Colors.WHITE, piece: ChessPieces.ROOK },
-  N: { color: Colors.WHITE, piece: ChessPieces.KNIGHT },
-  B: { color: Colors.WHITE, piece: ChessPieces.BISHOP },
-  Q: { color: Colors.WHITE, piece: ChessPieces.QUEEN },
-  K: { color: Colors.WHITE, piece: ChessPieces.KING },
-};
 
 class Game {
   fen: string;
@@ -168,9 +154,28 @@ class Game {
       this.movesNext =
         this.movesNext === Colors.WHITE ? Colors.BLACK : Colors.WHITE;
       this.getAllPossibleMoves();
+      FenGenerator.generateFen(
+        this.gameState,
+        this.movesNext,
+        this.castlingAvailability,
+        this.enPassantPossibility,
+        this.halfMoveClock,
+        this.fullMoveNumber,
+      );
       return true;
     }
     return false;
+  }
+
+  public generateFen() {
+    return FenGenerator.generateFen(
+      this.gameState,
+      this.movesNext,
+      this.castlingAvailability,
+      this.enPassantPossibility,
+      this.halfMoveClock,
+      this.fullMoveNumber,
+    );
   }
 }
 

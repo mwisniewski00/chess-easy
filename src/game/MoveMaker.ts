@@ -1,8 +1,11 @@
 import { ChessPieces, Colors } from "../types/common";
 import { GameState } from "../types/game";
-import { fenSymbolsToPiecesMapping } from "./Game";
 import { MoveIndexes } from "./MoveIndexes";
-import { cloneGameState, indexesToField } from "../utils";
+import {
+  cloneGameState,
+  fenSymbolsToPiecesMapping,
+  indexesToField,
+} from "../utils";
 
 export class MoveMaker {
   gameState: GameState;

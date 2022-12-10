@@ -1,4 +1,5 @@
-import { GameState, GameStateRow } from "./types/game";
+import { ChessPieces, Colors } from "./types/common";
+import { GameState, GameStateField, GameStateRow } from "./types/game";
 
 export function mapColumnIndexToLetter(column: number) {
   return String.fromCharCode(column + 97);
@@ -33,3 +34,26 @@ export function cloneGameState(gameState: GameState) {
   });
   return newGameState;
 }
+
+export const fenSymbolsToPiecesMapping = {
+  p: { color: Colors.BLACK, piece: ChessPieces.PAWN },
+  r: { color: Colors.BLACK, piece: ChessPieces.ROOK },
+  n: { color: Colors.BLACK, piece: ChessPieces.KNIGHT },
+  b: { color: Colors.BLACK, piece: ChessPieces.BISHOP },
+  q: { color: Colors.BLACK, piece: ChessPieces.QUEEN },
+  k: { color: Colors.BLACK, piece: ChessPieces.KING },
+  P: { color: Colors.WHITE, piece: ChessPieces.PAWN },
+  R: { color: Colors.WHITE, piece: ChessPieces.ROOK },
+  N: { color: Colors.WHITE, piece: ChessPieces.KNIGHT },
+  B: { color: Colors.WHITE, piece: ChessPieces.BISHOP },
+  Q: { color: Colors.WHITE, piece: ChessPieces.QUEEN },
+  K: { color: Colors.WHITE, piece: ChessPieces.KING },
+};
+
+export const fieldToFenSymbol = (field: GameStateField) => {
+  return Object.keys(fenSymbolsToPiecesMapping).find(
+    key =>
+      fenSymbolsToPiecesMapping[key].piece === field.piece &&
+      fenSymbolsToPiecesMapping[key].color === field.color,
+  );
+};
