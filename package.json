@@ -1,5 +1,5 @@
 {
-  "name": "chessgame",
+  "name": "chess-easy",
   "version": "1.0.0",
   "description": "Chess engine that makes writing chessgame easier than writing a calculator",
   "main": "dist/index.js",
