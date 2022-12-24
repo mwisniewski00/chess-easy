@@ -1,0 +1,44 @@
+{
+  "name": "chessgame",
+  "version": "1.0.0",
+  "description": "Chess engine that makes writing chessgame easier than writing a calculator",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "/dist"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "tsc --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+git@github.com:mwisniewski00/chessgame.git"
+  },
+  "keywords": [
+    "chess",
+    "fen",
+    "chessgame",
+    "game",
+    "chessengine"
+  ],
+  "contributors": [
+    {
+      "name": "Maciej Wiśniewski",
+      "email": "macwis162@gmail.com",
+      "url": "https://github.com/mwisniewski00"
+    },
+    {
+      "name": "Patryk Wawrzyniak",
+      "url": "https://github.com/Azalurg"
+    },
+    {
+      "name": "Igor Pustovoy",
+      "url": "https://github.com/igorpustovoy"
+    }
+  ],
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^4.9.4"
+  }
+}

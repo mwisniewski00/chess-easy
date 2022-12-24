@@ -26,7 +26,7 @@ type FenFieldSymbol =
   | "Q"
   | "K";
 
-class Game {
+export class Game {
   fen: string;
   gameState: GameState;
   movesNext: Colors;
@@ -95,7 +95,7 @@ class Game {
     } = movesGenerator.getAllPossibleMoves(
       this.movesNext,
       this.castlingAvailability,
-      this.enPassantPossibility,
+      this.enPassantPossibility
     );
     this.isCheck = isCheck;
     this.isCheckmate = isCheckmate;
@@ -124,7 +124,7 @@ class Game {
     return MoveMaker.isPromotionMove(
       this.gameState,
       moveIndexes,
-      this.movesNext,
+      this.movesNext
     );
   }
 
@@ -144,7 +144,7 @@ class Game {
         this.gameState,
         this.enPassantPossibility,
         this.movesNext,
-        this.castlingAvailability,
+        this.castlingAvailability
       );
       const { gameState, enPassantPossibility, castlingAvailability } =
         moveMaker.move(from, to, promotion);
@@ -160,7 +160,7 @@ class Game {
         this.castlingAvailability,
         this.enPassantPossibility,
         this.halfMoveClock,
-        this.fullMoveNumber,
+        this.fullMoveNumber
       );
       return true;
     }
@@ -174,7 +174,7 @@ class Game {
       this.castlingAvailability,
       this.enPassantPossibility,
       this.halfMoveClock,
-      this.fullMoveNumber,
+      this.fullMoveNumber
     );
   }
 }

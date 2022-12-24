@@ -4,9 +4,9 @@ import { fieldToFenSymbol } from "../utils";
 
 class FenGenerator {
   private static generateGameStateString(gameState: GameState) {
-    const rows = [...gameState].reverse().map(row => {
+    const rows = [...gameState].reverse().map((row) => {
       let rowResult = "";
-      row.forEach(field => {
+      row.forEach((field) => {
         if (!field) {
           if (rowResult.length) {
             const lastLetterIndex = rowResult.length - 1;
@@ -41,12 +41,12 @@ class FenGenerator {
     castlingAvailability: string,
     enPassantPossibility: string,
     halfMoveClock: number,
-    fullMoveNumber: number,
+    fullMoveNumber: number
   ) {
     return [
       this.generateGameStateString(gameState),
       this.generateMovesNextString(movesNext),
-      castlingAvailability,
+      castlingAvailability || "-",
       enPassantPossibility,
       String(halfMoveClock),
       String(fullMoveNumber),
