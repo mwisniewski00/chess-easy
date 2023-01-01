@@ -177,6 +177,10 @@ export class Game {
       this.fullMoveNumber
     );
   }
+
+  public getNextColor() {
+    return this.movesNext === Colors.WHITE ? "white" : "black";
+  }
 }
 
 export default Game;
