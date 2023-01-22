@@ -35,6 +35,23 @@ const gameFromFen = new Game(`rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R 
 - `generateFen(): string`: Returns Fen string from current game state
 - `getNextColor(): "black" | "white"`: Returns string with next moving color.
 
+## Game object fields
+
+```
+  fen: string;
+  gameState: GameState;
+  movesNext: Colors;
+  castlingAvailability: string;
+  enPassantPossibility: string;
+  halfMoveClock: number;
+  fullMoveNumber: number;
+  possibleMoves: PossibleMoves;
+  isCheck: boolean;
+  isCheckmate: boolean;
+  isStalemate: boolean;
+  isInsufficientMaterial: boolean;
+```
+
 ## Types
 
 - ```
