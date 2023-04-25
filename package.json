@@ -1,6 +1,6 @@
 {
   "name": "chess-easy",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Chess engine that makes writing chessgame easier than writing a calculator",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
