@@ -4,6 +4,7 @@ import {
   GameStateObject,
   GameStateRow,
   PossibleMoves,
+  PromotionPossibility,
 } from "../types/game";
 import FenValidator from "./FenValidator";
 import { MovesGenerator } from "./MovesGenerator";
@@ -27,9 +28,9 @@ type FenFieldSymbol =
   | "K";
 
 export class Game {
-  fen: string;
-  gameState: GameState;
-  movesNext: Colors;
+  private fen: string;
+  private gameState: GameState;
+  private movesNext: Colors;
   castlingAvailability: string;
   enPassantPossibility: string;
   halfMoveClock: number;
@@ -37,8 +38,8 @@ export class Game {
   possibleMoves: PossibleMoves;
   isCheck: boolean;
   isCheckmate: boolean;
-  isStalemate: boolean;
-  isInsufficientMaterial: boolean;
+  private isStalemate: boolean;
+  private isInsufficientMaterial: boolean;
   private START_GAME_FEN =
     "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
@@ -138,7 +139,11 @@ export class Game {
     return { isDraw: false };
   }
 
-  public move(from: string, to: string, promotion: string = "q") {
+  public move(
+    from: string,
+    to: string,
+    promotion: PromotionPossibility = PromotionPossibility.QUEEN
+  ) {
     if (this.possibleMoves[from].includes(to)) {
       const moveMaker = new MoveMaker(
         this.gameState,

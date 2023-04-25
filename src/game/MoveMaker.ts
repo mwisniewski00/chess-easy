@@ -1,5 +1,5 @@
 import { ChessPieces, Colors } from "../types/common";
-import { GameState } from "../types/game";
+import { GameState, PromotionPossibility } from "../types/game";
 import { MoveIndexes } from "./MoveIndexes";
 import {
   cloneGameState,
@@ -17,7 +17,7 @@ export class MoveMaker {
     gameState: GameState,
     enPassantPossibility: string,
     movesNext: Colors,
-    castlingAvailability: string,
+    castlingAvailability: string
   ) {
     this.gameState = cloneGameState(gameState);
     this.enPassantPossibility = enPassantPossibility.slice();
@@ -78,7 +78,7 @@ export class MoveMaker {
   public static isPromotionMove(
     gameState: GameState,
     moveIndexes: MoveIndexes,
-    movesNext: Colors,
+    movesNext: Colors
   ) {
     const movingPiece =
       gameState[moveIndexes.from.row][moveIndexes.from.column];
@@ -89,7 +89,10 @@ export class MoveMaker {
     );
   }
 
-  private getNewPiece(moveIndexes: MoveIndexes, promotion: string) {
+  private getNewPiece(
+    moveIndexes: MoveIndexes,
+    promotion: PromotionPossibility
+  ) {
     if (
       MoveMaker.isPromotionMove(this.gameState, moveIndexes, this.movesNext)
     ) {
@@ -106,7 +109,7 @@ export class MoveMaker {
     const castleRegexToRemove = color === Colors.BLACK ? /[^A-Z]/g : /[^a-z]/g;
     this.castlingAvailability = this.castlingAvailability.replace(
       castleRegexToRemove,
-      "",
+      ""
     );
   }
 
@@ -118,17 +121,17 @@ export class MoveMaker {
     }
     this.removeCastilngIfRookStateChange(
       moveIndexes.from.column,
-      moveIndexes.from.row,
+      moveIndexes.from.row
     );
     this.removeCastilngIfRookStateChange(
       moveIndexes.to.column,
-      moveIndexes.to.row,
+      moveIndexes.to.row
     );
   }
 
   private removeCastilngIfRookStateChange(
     column_index: number,
-    row_index: number,
+    row_index: number
   ) {
     const piece = this.gameState[row_index][column_index];
     if (
@@ -143,7 +146,7 @@ export class MoveMaker {
           : castleSideToRemove;
       this.castlingAvailability = this.castlingAvailability.replace(
         castleToRemove,
-        "",
+        ""
       );
     }
   }
@@ -156,7 +159,7 @@ export class MoveMaker {
       const colorMultiplier = this.movesNext === Colors.BLACK ? 1 : -1;
       const enPassantField = indexesToField(
         moveIndexes.to.row + 1 * colorMultiplier,
-        moveIndexes.to.column,
+        moveIndexes.to.column
       );
       this.enPassantPossibility = enPassantField;
     } else {
@@ -164,7 +167,11 @@ export class MoveMaker {
     }
   }
 
-  public move(from: string, to: string, promotion: string = "q") {
+  public move(
+    from: string,
+    to: string,
+    promotion: PromotionPossibility = PromotionPossibility.QUEEN
+  ) {
     const moveIndexes = new MoveIndexes(from, to);
     const initialValues = {
       enPassantPossibility: this.enPassantPossibility,
