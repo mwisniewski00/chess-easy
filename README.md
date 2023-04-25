@@ -27,11 +27,11 @@ const gameFromFen = new Game(`rnbqkbnr/pp1ppppp/8/2p5/4P3/5N2/PPPP1PPP/RNBQKB1R 
 - `getGameStateObject(): GameStateObject`: Getting current state of game as object ex. `{'e4': {piece: ChessPieces.KNHIGHT, color: COLORS.WHITE}, ...}`
 - `isPromotionMove(from: string, to: string): boolean`: Getting information if given move will cause promoting a pawn, useful for fronted, when you want to show some modal with choice of the promortion piece
 - `isDraw(): {isDraw: boolean, reason?: string}`: Getting information if current game state is draw. Reason field exists if `isDraw` is `true` and can be one of 2 values: `'Stalemate'`, or `'Insufficient Material'`
-- `move(from: string, to: string, promotion: string = "q"): boolean` - This methods validate if given move is correct and makes the move if it is valid. `promotion` argument is used only if move ends with promotion of a pawn and can have on of four values:
-  - `r`: Rook
-  - `b`: Bishop
-  - `k`: Knight
-  - `q`: Queen
+- `move(from: string, to: string, promotion: PromotionPossibility = PromotionPossibility.QUEEN): boolean` - This method validates if given move is correct and makes the move if it is valid. `promotion` argument is used only if move ends with promotion of a pawn and can have one of four values:
+  - `PromotionPossibility.ROOK`
+  - `PromotionPossibility.BISHOP`
+  - `PromotionPossibility.KNIGHT`
+  - `PromotionPossibility.QUEEN`
 - `generateFen(): string`: Returns Fen string from current game state
 - `getNextColor(): "black" | "white"`: Returns string with next moving color.
 
