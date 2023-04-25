@@ -16,3 +16,10 @@ export type GameStateObject = {
 export type PossibleMoves = {
   [key: string]: string[];
 };
+
+export enum PromotionPossibility {
+  QUEEN = "q",
+  ROOK = "r",
+  BISHOP = "b",
+  KNIGHT = "k",
+}
